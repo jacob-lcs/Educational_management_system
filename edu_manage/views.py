@@ -1,13 +1,16 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 from django.template import loader
 from .models import C, D, E, O, S, T
 
 
-def index(request):
-    student_list = S.objects.order_by('xh')
-    template = loader.get_template('edu_manage/index.html')
-    context = {
-        'student_list': student_list,
-    }
-    return HttpResponse(template.render(context, request))
+def login(request):
+    name = request.GET['name']
+    psw = request.GET['psw']
+    stu = S.objects.filter(xh=name, psw=psw)
+    if stu:
+        response = JsonResponse({"info": "yes"})
+    else:
+        response = JsonResponse({"info": "no"})
+    return response

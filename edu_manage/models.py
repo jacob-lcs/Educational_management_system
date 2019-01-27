@@ -9,6 +9,7 @@ class S(models.Model):
     jg = models.CharField(max_length=200)
     sjhm = models.CharField(max_length=200)
     yxh = models.CharField(max_length=200)
+    psw = models.CharField(max_length=200)
 
 
 class C(models.Model):
