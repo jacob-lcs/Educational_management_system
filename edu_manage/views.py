@@ -24,3 +24,11 @@ def course_info(request):
     for course in courses:
         response.append(model_to_dict(course))
     return HttpResponse(json.dumps(response), content_type="application/json")
+
+
+def departments_info(request):
+    response = []
+    departments = D.objects.all()
+    for department in departments:
+        response.append(model_to_dict(department))
+    return HttpResponse(json.dumps(response), content_type="application/json")

@@ -40,7 +40,14 @@
 
         <el-main>
           <el-table :data="tableData">
-
+            <el-table-column prop="yxh" label="院系号" width="120">
+            </el-table-column>
+            <el-table-column prop="mc" label="名称" width="120">
+            </el-table-column>
+            <el-table-column prop="dz" label="地址" width="160">
+            </el-table-column>
+            <el-table-column prop="lxdh" label="联系电话" width="120">
+            </el-table-column>
           </el-table>
         </el-main>
       </el-container>
@@ -50,14 +57,24 @@
 
 <script>
   export default {
-    name: "home",
+    name: "departments_informations",
     data() {
-
       return {
         tableData: [],
         name: 'lcs',
         stu_number: '1101'
       }
+    },
+    mounted() {
+      let that = this;
+      $.ajax({
+          url: "/departments_info/",
+          dataType: "json",
+          data:{},
+          success: function (data) {
+            that.tableData = data
+          }
+        })
     }
   }
 </script>
