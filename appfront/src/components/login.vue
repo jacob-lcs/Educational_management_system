@@ -53,10 +53,13 @@
                 type: 'warning'
               });
             } else {
+              that.COMMON.name = data['name']
+              that.COMMON.stu_number = that.stu_number
               that.$router.push({
                 name: "home",
                 params: {
-                  stu_number: that.stu_number
+                  stu_number: that.stu_number,
+                  stu_name: data['name']
                 }
               });
             }

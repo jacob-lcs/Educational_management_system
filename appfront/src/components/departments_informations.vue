@@ -75,6 +75,8 @@
             that.tableData = data
           }
         })
+      this.name = this.COMMON.name
+      this.stu_number = this.COMMON.stu_number
     }
   }
 </script>

@@ -63,8 +63,8 @@
     data() {
       return {
         tableData: [],
-        name: 'lcs',
-        stu_number: '1101'
+        name: '',
+        stu_number: ''
       }
     },
     mounted() {
@@ -78,6 +78,8 @@
             that.tableData = data
           }
         })
+      this.name = this.COMMON.name
+      this.stu_number = this.COMMON.stu_number
     }
   }
 </script>

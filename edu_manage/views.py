@@ -12,7 +12,7 @@ def login(request):
     psw = request.GET['psw']
     stu = S.objects.filter(xh=name, psw=psw)
     if stu:
-        response = JsonResponse({"info": "yes"})
+        response = JsonResponse({"info": "yes", "name": stu[0].xm})
     else:
         response = JsonResponse({"info": "no"})
     return response

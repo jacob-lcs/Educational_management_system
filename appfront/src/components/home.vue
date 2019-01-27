@@ -28,14 +28,16 @@
       </el-aside>
 
       <el-container>
-        <el-header style="text-align: right; font-size: 12px">
-          <el-dropdown>
-            <i class="el-icon-setting" style="margin-right: 15px"></i>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>安全退出</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
-          <span style="color: white">欢迎，{{name}}</span>
+        <el-header style="font-size: 12px">
+          <div style="text-align: right;">
+            <el-dropdown>
+              <i class="el-icon-setting" style="margin-right: 15px"></i>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item>安全退出</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+            <span style="color: white">欢迎，{{name}}</span>
+          </div>
         </el-header>
 
         <el-main>
@@ -55,9 +57,13 @@
 
       return {
         tableData: [],
-        name: 'lcs',
-        stu_number: '1101'
+        name: '',
+        stu_number: ''
       }
+    },
+    mounted() {
+      this.name = this.$route.params.stu_name
+      this.stu_number = this.$route.params.stu_number
     }
   }
 </script>
