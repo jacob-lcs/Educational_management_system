@@ -1,17 +1,40 @@
 # 教务管理系统
 
 ## 使用方法
-1. 安装所需依赖
+
+1. 修改数据库密码
+
+```python
+# 文件路径 Educational_management_system\Educational_management_system\settings.py
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql', # 无需修改
+        'NAME': '',  # 数据库名称
+        'USER': '',  # 数据库用户名
+        'PASSWORD': '',  # 数据库密码
+        'HOST': '127.0.0.1',  # 无需修改
+        'PORT': '3306',  # 一般为此端口，请根据自己的需要修改
+    }
+}
+```
+
+2. 进入前端目录 
+
 ```
 cd appfront
+```
+
+3. 安装所需依赖
+
+```
 npm install
 ```
-2. 构建项目
+4. 构建项目
+
 ```
-cd appfront
 npm build
 ```
-3. 运行django项目
+5. 运行django项目
 
 ## 初始化版本
 + 后端框架 Django
@@ -21,3 +44,6 @@ npm build
 
 ---
 
+## 教务管理系统0.1版本
+
++ 登录功能实现
