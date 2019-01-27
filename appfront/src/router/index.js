@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import login from '@/components/login'
 import home from '@/components/home'
+import Course_information from '@/components/Course_information'
 
 Vue.use(Router)
 
@@ -16,6 +17,11 @@ export default new Router({
       path: '/home',
       name: 'home',
       component: home
+    },
+    {
+      path: '/Course_information',
+      name: 'Course_information',
+      component: Course_information
     }
   ]
 })

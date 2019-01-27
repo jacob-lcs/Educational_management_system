@@ -40,7 +40,16 @@
 
         <el-main>
           <el-table :data="tableData">
-
+            <el-table-column prop="kh" label="课程号" width="120">
+            </el-table-column>
+            <el-table-column prop="km" label="课程名" width="120">
+            </el-table-column>
+            <el-table-column prop="yxh" label="院系号" width="120">
+            </el-table-column>
+            <el-table-column prop="xf" label="学分" width="120">
+            </el-table-column>
+            <el-table-column prop="xs" label="学时" width="120">
+            </el-table-column>
           </el-table>
         </el-main>
       </el-container>
@@ -50,14 +59,25 @@
 
 <script>
   export default {
-    name: "home",
+    name: "Course_information",
     data() {
-
       return {
         tableData: [],
         name: 'lcs',
         stu_number: '1101'
       }
+    },
+    mounted() {
+      let that = this;
+      $.ajax({
+          url: "/course_info/",
+          dataType: "json",
+          data:{},
+          success: function (data) {
+            // console.log(data[1]);
+            that.tableData = data
+          }
+        })
     }
   }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="all">
     <el-row class="title">
       <p>教务管理系统</p>
     </el-row>

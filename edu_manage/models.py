@@ -18,6 +18,7 @@ class C(models.Model):
     xf = models.IntegerField(null=True)
     xs = models.IntegerField(null=True)
     yxh = models.CharField(max_length=200)
+    kaike = models.BooleanField(True)
 
 
 class D(models.Model):
