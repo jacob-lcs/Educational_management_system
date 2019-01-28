@@ -15,7 +15,7 @@
             <el-menu-item-group>
               <el-menu-item index="/Course_information">课程信息</el-menu-item>
               <el-menu-item index="/departments_informations">院系信息</el-menu-item>
-              <el-menu-item index="2-3">成绩查询</el-menu-item>
+              <el-menu-item index="/my_courses">我的课程</el-menu-item>
               <el-menu-item index="2-4">教学评估</el-menu-item>
               <el-menu-item index="2-5">海外交流</el-menu-item>
               <el-menu-item index="2-6">学分抵充</el-menu-item>

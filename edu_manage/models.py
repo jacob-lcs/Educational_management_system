@@ -2,6 +2,7 @@ from django.db import models
 
 
 class S(models.Model):
+    id = models.AutoField(primary_key=True)
     xh = models.CharField(max_length=200)
     xm = models.CharField(max_length=200)
     xb = models.CharField(max_length=200)
@@ -13,15 +14,16 @@ class S(models.Model):
 
 
 class C(models.Model):
+    id = models.AutoField(primary_key=True)
     kh = models.CharField(max_length=200)
     km = models.CharField(max_length=200)
     xf = models.IntegerField(null=True)
     xs = models.IntegerField(null=True)
     yxh = models.CharField(max_length=200)
-    kaike = models.BooleanField(True)
 
 
 class D(models.Model):
+    id = models.AutoField(primary_key=True)
     yxh = models.CharField(max_length=200)
     mc = models.CharField(max_length=200)
     dz = models.CharField(max_length=200)
@@ -29,6 +31,7 @@ class D(models.Model):
 
 
 class E(models.Model):
+    id = models.AutoField(primary_key=True)
     xh = models.CharField(max_length=200)
     xq = models.CharField(max_length=200)
     kh = models.CharField(max_length=200)
@@ -36,9 +39,18 @@ class E(models.Model):
     pscj = models.IntegerField(null=True)
     kscj = models.IntegerField(null=True)
     zpcj = models.IntegerField(null=True)
+    # 与课程名建立一对多的关系
+    course = models.ForeignKey(to='C', to_field='id', on_delete=models.CASCADE, default=None)
+    # 与教师建立一对多的关系
+    teacher = models.ForeignKey(to='T', to_field='id', on_delete=models.CASCADE, default=None)
 
 
 class O(models.Model):
+    id = models.AutoField(primary_key=True)
+    # 与课程名建立一对多的关系
+    course = models.ForeignKey(to='C', to_field='id', on_delete=models.CASCADE, default=None)
+    # 与教师建立一对多的关系
+    teacher = models.ForeignKey(to='T', to_field='id', on_delete=models.CASCADE, default=None)
     xq = models.CharField(max_length=200)
     kh = models.CharField(max_length=200)
     gh = models.CharField(max_length=200)
@@ -46,6 +58,7 @@ class O(models.Model):
 
 
 class T(models.Model):
+    id = models.AutoField(primary_key=True)
     gh = models.CharField(max_length=200)
     xm = models.CharField(max_length=200)
     xb = models.CharField(max_length=200)
