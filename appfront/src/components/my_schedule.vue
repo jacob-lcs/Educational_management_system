@@ -28,6 +28,17 @@
       </el-aside>
 
       <el-container>
+        <el-dialog
+          title="提示"
+          :visible.sync="centerDialogVisible"
+          width="30%"
+          center>
+          <span>删除成功</span>
+          <span slot="footer" class="dialog-footer">
+    <el-button @click="centerDialogVisible = false">取 消</el-button>
+    <el-button type="primary" @click="centerDialogVisible = false">确 定</el-button>
+  </span>
+        </el-dialog>
         <el-header style="text-align: right; font-size: 12px">
           <el-dropdown>
             <i class="el-icon-setting" style="margin-right: 15px"></i>
@@ -39,16 +50,48 @@
         </el-header>
 
         <el-main>
-          <el-table :data="tableData">
-            <el-table-column prop="kh" label="课程号" width="120">
+          <el-table
+            :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
+            style="width: 100%">
+            <el-table-column
+              label="课程号"
+              prop="kh">
             </el-table-column>
-            <el-table-column prop="km" label="课程名" width="120">
+            <el-table-column
+              label="课程名"
+              prop="km">
             </el-table-column>
-            <el-table-column prop="yxh" label="院系号" width="120">
+            <el-table-column
+              label="教师名"
+              prop="jsm">
             </el-table-column>
-            <el-table-column prop="xf" label="学分" width="120">
+            <el-table-column
+              label="上课时间"
+              prop="sksj">
             </el-table-column>
-            <el-table-column prop="xs" label="学时" width="120">
+            <el-table-column
+              label="学分"
+              prop="xf">
+            </el-table-column>
+            <el-table-column
+              label="学时"
+              prop="xs">
+            </el-table-column>
+            <el-table-column
+              align="right">
+              <template slot="header" slot-scope="scope">
+                <el-input
+                  v-model="search"
+                  size="mini"
+                  placeholder="输入关键字搜索"/>
+              </template>
+              <template slot-scope="scope">
+                <el-button
+                  size="mini"
+                  type="danger"
+                  @click="handleDelete(scope.$index, scope.row)">Delete
+                </el-button>
+              </template>
             </el-table-column>
           </el-table>
         </el-main>
@@ -59,27 +102,49 @@
 
 <script>
   export default {
-    name: "Course_information",
+    name: "my_schedule",
     data() {
       return {
         tableData: [],
+        search: '',
         name: '',
-        stu_number: ''
+        stu_number: '',
+        centerDialogVisible: false
+      }
+    },
+    methods: {
+      handleDelete(index, row) {
+        let that = this
+        $.ajax({
+          url: "/del_course/",
+          dataType: "json",
+          data: {
+            kh: row.kh,
+            jsm: row.jsm
+          },
+          success: function (data) {
+            if (data['res'] == 'OK') {
+              that.centerDialogVisible = true
+            }
+          }
+        })
       }
     },
     mounted() {
       let that = this;
-      $.ajax({
-          url: "/course_info/",
-          dataType: "json",
-          data:{},
-          success: function (data) {
-            // console.log(data[1]);
-            that.tableData = data
-          }
-        })
       this.name = this.COMMON.name
       this.stu_number = this.COMMON.stu_number
+      $.ajax({
+        url: "/my_schedule/",
+        dataType: "json",
+        data: {
+          xh: that.stu_number
+        },
+        success: function (data) {
+          console.log(data[0]);
+          that.tableData = data
+        }
+      })
     }
   }
 </script>
