@@ -34,7 +34,20 @@ npm install
 ```
 npm build
 ```
-5. 运行django项目
+5. 进入项目根目录
+
+```
+cd ..
+```
+
+6. 迁移文件
+
+```python
+python manage.py makemigrations
+python manage.py migrate
+```
+
+7. 运行项目
 
 ## 初始化版本
 + 后端框架 Django
@@ -44,7 +57,7 @@ npm build
 
 ---
 
-## 教务管理系统0.1版本
+## 教务管理系统1.0版本
 
 + 用户全局变量
 
@@ -53,5 +66,11 @@ npm build
 + 课程信息
 
 + 院系信息
+
++ 我的历史课程
+
++ 我的课表
+
++ 选课管理
 
   
