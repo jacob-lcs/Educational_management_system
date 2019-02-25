@@ -7,6 +7,7 @@ import departments_informations from '@/components/departments_informations'
 import my_courses from '@/components/my_courses'
 import select_courses from  '@/components/select_courses'
 import my_schedule from '@/components/my_schedule'
+import stu_information from '@/components/stu_information'
 
 Vue.use(Router)
 
@@ -46,6 +47,11 @@ export default new Router({
       path: '/my_schedule',
       name: 'my_schedule',
       component: my_schedule
+    },
+    {
+      path: '/stu_information',
+      name: '/stu_information',
+      component: stu_information
     }
   ]
 })

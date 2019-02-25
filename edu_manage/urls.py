@@ -1,4 +1,3 @@
-from django.urls import path
 from django.conf.urls import url
 
 from . import views
@@ -11,5 +10,6 @@ urlpatterns = [
     url('open_schedule/', views.open_schedule, name='open_schedule'),
     url('my_schedule/', views.my_schedule, name='my_schedule'),
     url('add_course/', views.add_course, name='add_course'),
-    url('del_course/', views.del_course, name='del_course')
+    url('del_course/', views.del_course, name='del_course'),
+    url('stu_information/', views.stu_information, name='stu_information')
 ]

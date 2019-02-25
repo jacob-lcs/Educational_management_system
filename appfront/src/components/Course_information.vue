@@ -6,8 +6,8 @@
           <el-submenu index="1">
             <template slot="title"><i class="el-icon-message"></i>学生信息</template>
             <el-menu-item-group>
-              <el-menu-item index="1-1">姓名： {{name}}</el-menu-item>
-              <el-menu-item index="1-2">学号： {{stu_number}}</el-menu-item>
+              <el-menu-item index="/stu_information">姓名： {{name}}</el-menu-item>
+              <el-menu-item>学号： {{stu_number}}</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
           <el-submenu index="2">
@@ -32,7 +32,7 @@
           <el-dropdown>
             <i class="el-icon-setting" style="margin-right: 15px"></i>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>安全退出</el-dropdown-item>
+              <el-dropdown-item @click.native="quit_login">安全退出</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
           <span style="color: white">欢迎，{{name}}</span>
@@ -67,6 +67,14 @@
         stu_number: ''
       }
     },
+    methods:{
+      quit_login(){
+        console.log("用户点击退出登录");
+        sessionStorage.clear();
+        console.log("SessionStorage：", sessionStorage.getItem('person_id'))
+        this.$router.push('/')
+      }
+    },
     mounted() {
       let that = this;
       $.ajax({
@@ -78,8 +86,10 @@
             that.tableData = data
           }
         })
-      this.name = this.COMMON.name
-      this.stu_number = this.COMMON.stu_number
+      // this.name = this.COMMON.name
+      // this.stu_number = this.COMMON.stu_number
+      this.name = sessionStorage.getItem('person_name');
+      this.stu_number = sessionStorage.getItem('person_id');
     }
   }
 </script>

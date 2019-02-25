@@ -92,3 +92,13 @@ def del_course(request):
     courses = E.objects.filter(kh=kh, gh=gh)
     courses.delete()
     return JsonResponse({"res": 'OK'})
+
+
+def stu_information(request):
+    xh = request.GET['xh']
+    response = []
+    infos_stu = S.objects.filter(xh=xh)
+    for info_stu in infos_stu:
+        response.append(model_to_dict(info_stu))
+    return JsonResponse(response, safe=False)
+

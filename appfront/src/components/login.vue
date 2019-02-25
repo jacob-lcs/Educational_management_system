@@ -62,6 +62,8 @@
                   stu_name: data['name']
                 }
               });
+              sessionStorage.setItem('person_id', that.stu_number);
+              sessionStorage.setItem('person_name', data['name']);
             }
           }
         })
@@ -88,8 +90,13 @@
   }
 
   .title {
-    margin-top: 23vh;
+    padding-top: 23vh;
     font-size: 30px;
+  }
+
+  .all{
+    background-image: url("../assets/img/bg.jpg");
+    height: 97vh;
   }
 
 </style>

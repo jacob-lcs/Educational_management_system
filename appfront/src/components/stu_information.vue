@@ -28,22 +28,18 @@
       </el-aside>
 
       <el-container>
-        <el-header style="font-size: 12px">
-          <div style="text-align: right;">
-            <el-dropdown>
-              <i class="el-icon-setting" style="margin-right: 15px"></i>
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item @click.native="quit_login">安全退出</el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
-            <span style="color: white">欢迎，{{name}}</span>
-          </div>
+        <el-header style="text-align: right; font-size: 12px">
+          <el-dropdown>
+            <i class="el-icon-setting" style="margin-right: 15px"></i>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item @click.native="quit_login">安全退出</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+          <span style="color: white">欢迎，{{name}}</span>
         </el-header>
 
         <el-main>
-          <el-table :data="tableData">
-
-          </el-table>
+          
         </el-main>
       </el-container>
     </el-container>
@@ -52,9 +48,8 @@
 
 <script>
   export default {
-    name: "home",
+    name: "stu_information",
     data() {
-
       return {
         tableData: [],
         name: '',
@@ -62,6 +57,7 @@
       }
     },
     methods:{
+
       quit_login(){
         console.log("用户点击退出登录");
         sessionStorage.clear();
@@ -70,13 +66,23 @@
       }
     },
     mounted() {
-      // this.name = this.$route.params.stu_name
-      // this.stu_number = this.$route.params.stu_number
+      let that = this;
+      // this.name = this.COMMON.name
+      // this.stu_number = this.COMMON.stu_number
       this.name = sessionStorage.getItem('person_name');
       this.stu_number = sessionStorage.getItem('person_id');
-      if (this.name == ""){
-        this.$router.push('/')
-      }
+      $.ajax({
+        url: "/stu_information/",
+        dataType: "json",
+        data: {
+          xh: that.stu_number
+        },
+        success: function (data) {
+          console.log(data[0]);
+          that.tableData = data
+        }
+      })
+
     }
   }
 </script>
@@ -95,5 +101,9 @@
   .row-aside {
     margin-top: 20px;
     font-size: 15px;
+  }
+
+  .info{
+    text-align: center;
   }
 </style>
