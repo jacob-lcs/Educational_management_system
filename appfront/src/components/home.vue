@@ -4,7 +4,7 @@
       <el-aside width="200px" style="background-color: white">
         <el-menu :default-openeds="['1', '2']" router>
           <el-submenu index="1">
-            <template slot="title"><i class="el-icon-message"></i>学生信息</template>
+            <template slot="title"><i class="el-icon-message"></i>个人信息</template>
             <el-menu-item-group>
               <el-menu-item index="/stu_information">姓名： {{name}}</el-menu-item>
               <el-menu-item>学号： {{stu_number}}</el-menu-item>
@@ -18,7 +18,7 @@
               <el-menu-item index="/my_courses">我的历史课程</el-menu-item>
               <el-menu-item index="/select_courses">选课管理</el-menu-item>
               <el-menu-item index="/my_schedule">我的课表</el-menu-item>
-              <el-menu-item index="2-6">学分抵充</el-menu-item>
+              <el-menu-item index="/grade_manage">成绩管理</el-menu-item>
               <el-menu-item index="2-7">试读警告</el-menu-item>
               <el-menu-item index="2-8">学分完成情况</el-menu-item>
             </el-menu-item-group>

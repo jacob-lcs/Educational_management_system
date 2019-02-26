@@ -66,3 +66,4 @@ class T(models.Model):
     xl = models.CharField(max_length=200)
     jbgz = models.FloatField(null=True)
     yxh = models.CharField(max_length=200)
+    psw = models.CharField(max_length=200)

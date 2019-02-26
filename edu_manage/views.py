@@ -9,9 +9,13 @@ def login(request):
     psw = request.GET['psw']
     stu = S.objects.filter(xh=name, psw=psw)
     if stu:
-        response = JsonResponse({"info": "yes", "name": stu[0].xm})
+        response = JsonResponse({"info": "yes", "name": stu[0].xm, "TeacherorStudent": "0"})
     else:
-        response = JsonResponse({"info": "no"})
+        teacher = T.objects.filter(gh=name, psw=psw)
+        if teacher:
+            response = JsonResponse({"info": "yes", "name": teacher[0].xm, "TeacherorStudent": "1"})
+        else:
+            response = JsonResponse({"info": "no"})
     return response
 
 
@@ -102,3 +106,25 @@ def stu_information(request):
         response.append(model_to_dict(info_stu))
     return JsonResponse(response, safe=False)
 
+
+def find_course_teacher(request):
+    gh = request.GET['gh']
+    courses = O.objects.filter(gh=gh)
+    response = []
+    for course in courses:
+        response.append(
+            {'kh': course.kh, 'km': course.course.km})
+    return JsonResponse(response, safe=False)
+
+
+def find_student_course(request):
+    kh = request.GET['kh']
+    student_ids = E.objects.filter(kh=kh, xq='2018-2019春季')
+    response = []
+    for student_id in student_ids:
+        print(student_id.xh)
+        student_name = S.objects.filter(xh=student_id.xh)
+        response.append({'xh': student_id.xh, 'xm': student_name[0].xm, 'pscj': student_id.pscj, 'kscj': student_id.kscj,
+                         'zpcj': student_id.zpcj})
+
+    return JsonResponse(response, safe=False)

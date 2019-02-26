@@ -8,6 +8,7 @@ import my_courses from '@/components/my_courses'
 import select_courses from  '@/components/select_courses'
 import my_schedule from '@/components/my_schedule'
 import stu_information from '@/components/stu_information'
+import grade_manage from '@/components/grade_manage'
 
 Vue.use(Router)
 
@@ -52,6 +53,11 @@ export default new Router({
       path: '/stu_information',
       name: '/stu_information',
       component: stu_information
+    },
+    {
+      path: '/grade_manage',
+      name: '/grade_manage',
+      component: grade_manage
     }
   ]
 })

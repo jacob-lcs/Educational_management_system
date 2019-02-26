@@ -64,6 +64,8 @@
               });
               sessionStorage.setItem('person_id', that.stu_number);
               sessionStorage.setItem('person_name', data['name']);
+              sessionStorage.setItem('TeacherorStudent', data['TeacherorStudent'])
+              console.log("教师或者学号标记：", data['TeacherorStudent'])
             }
           }
         })
@@ -94,7 +96,7 @@
     font-size: 30px;
   }
 
-  .all{
+  .all {
     background-image: url("../assets/img/bg.jpg");
     height: 97vh;
   }
