@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bfce0cab-3a7d-4435-abbe-a3ebf0744293" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/edu_manage/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/edu_manage/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/edu_manage/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/edu_manage/views.py" afterDir="false" />
-    </list>
+    <list default="true" id="bfce0cab-3a7d-4435-abbe-a3ebf0744293" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,8 +19,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/edu_manage/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="397">
-              <caret line="139" column="30" lean-forward="true" selection-start-line="139" selection-start-column="30" selection-end-line="139" selection-end-column="30" />
+            <state relative-caret-position="616">
+              <caret line="138" column="30" lean-forward="true" selection-start-line="138" selection-start-column="30" selection-end-line="138" selection-end-column="30" />
               <folding>
                 <element signature="e#0#50#0" expanded="true" />
               </folding>
@@ -376,12 +372,12 @@
       <workItem from="1551066481118" duration="8972000" />
       <workItem from="1551192373800" duration="7301000" />
       <workItem from="1551226916920" duration="10365000" />
-      <workItem from="1551274187100" duration="2465000" />
+      <workItem from="1551274187100" duration="2634000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="156595000" />
+    <option name="totallyTimeSpent" value="156764000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -394,7 +390,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.20575693" />
@@ -407,7 +402,7 @@
       <window_info anchor="bottom" id="Docker" order="5" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="6" />
       <window_info anchor="bottom" id="Find" order="7" weight="0.32960895" />
-      <window_info anchor="bottom" id="Run" order="8" sideWeight="0.4792225" visible="true" weight="0.2553648" />
+      <window_info anchor="bottom" id="Run" order="8" sideWeight="0.4792225" weight="0.2553648" />
       <window_info anchor="bottom" id="Debug" order="9" sideWeight="0.49932975" weight="0.39944133" />
       <window_info anchor="bottom" id="Cvs" order="10" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="11" weight="0.4" />
@@ -717,8 +712,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/edu_manage/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="397">
-          <caret line="139" column="30" lean-forward="true" selection-start-line="139" selection-start-column="30" selection-end-line="139" selection-end-column="30" />
+        <state relative-caret-position="616">
+          <caret line="138" column="30" lean-forward="true" selection-start-line="138" selection-start-column="30" selection-end-line="138" selection-end-column="30" />
           <folding>
             <element signature="e#0#50#0" expanded="true" />
           </folding>
