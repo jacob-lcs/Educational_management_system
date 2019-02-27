@@ -48,6 +48,9 @@
                 :value="item.value">
               </el-option>
             </el-select>
+            <el-input v-model="input4" placeholder="请输入考试成绩占比,数字即可" @change="zhanbi" type="number"
+                      style="width: 250px; padding-left:20px"></el-input>
+
           </el-row>
           <el-table
             :data="tableData2"
@@ -68,7 +71,7 @@
               label="平时成绩"
               width="180">
               <template slot-scope="scope">
-                <el-input v-model="input"></el-input>
+                <el-input v-model="scope.row.nscore" @change="pscj(scope)"></el-input>
               </template>
             </el-table-column>
             <el-table-column
@@ -76,18 +79,14 @@
               label="考试成绩"
               width="180">
               <template slot-scope="scope">
-                <el-input v-model="input"></el-input>
+                <el-input v-model="scope.row.tscore" @change="kscj(scope)"></el-input>
               </template>
             </el-table-column>
             <el-table-column
               prop="zscore"
               label="总评成绩"
               width="180">
-              <template slot-scope="scope">
-                <el-input v-model="input"></el-input>
-              </template>
             </el-table-column>
-            <el-input v-model="input"></el-input>
           </el-table>
 
         </el-main>
@@ -106,7 +105,26 @@
     name: "grade_manage",
     methods: {
       onSubmit() {
-        console.log('submit!');
+        for (var i = 0; i < this.tableData2.length; i++) {
+          $.ajax({
+            url: "/input_geade/",
+            dataType: "json",
+            data: {
+              xh: this.tableData2[i].xh,
+              gh: this.stu_number,
+              kh: this.kh,
+              pscj: this.tableData2[i].nscore,
+              kscj: this.tableData2[i].tscore,
+              zpcj: this.tableData2[i].zscore
+            },
+            success: function (data) {
+              console.log(data);
+
+            }
+          })
+
+
+        }
       },
       quit_login() {
         console.log("用户点击退出登录");
@@ -114,23 +132,88 @@
         console.log("SessionStorage：", sessionStorage.getItem('person_id'))
         this.$router.push('/')
       },
-      in_change: function(e){
-        let that = this
-        console.log(e)
+      in_change: function (e) {
+        let that = this;
+        console.log(e);
+        this.kh = e;
+
         $.ajax({
-        url: "/find_student_course/",
-        dataType: "json",
-        data: {
-          kh: e
-        },
-        success: function (data) {
-          console.log(data);
-          that.tableData2 = []
-          for (var i = 0; i < data.length; i++) {
-            that.tableData2.push({'xm':data[i].xm,'xh':data[i].xh, 'nscore':data[i].pscj,  'tscore':data[i].kscj, 'zscore':data[i].zpcj})
+          url: "/find_student_course/",
+          dataType: "json",
+          data: {
+            kh: e,
+            gh: sessionStorage.getItem('person_id')
+          },
+          success: function (data) {
+            console.log(data);
+            that.tableData2 = []
+            for (var i = 0; i < data.length; i++) {
+              that.tableData2.push({
+                'xm': data[i].xm,
+                'xh': data[i].xh,
+                'nscore': data[i].pscj,
+                'tscore': data[i].kscj,
+                'zscore': data[i].zpcj
+              })
+            }
           }
+        })
+      },
+      zhanbi(e) {
+        let that = this;
+        console.log(e)
+        for (var i = 0; i < that.tableData2.length; i++) {
+          that.tableData2[i].zscore = String.valueOf(that.tableData2[i].nscore * (100 - parseInt(e)) * 0.01 + that.tableData2[i].tscore * parseInt(e) * 0.01);
         }
-      })
+      },
+      pscj(row) {
+        let that = this;
+        console.log(row);
+
+        function ks(a) {
+          var k1 = ''
+          if (a == '')
+            k1 = '0'
+          else
+            k1 = a
+          if (a == '')
+            k1 = '0'
+          else
+            k1 = a
+          return k1;
+        }
+
+        var kscj = ks(that.tableData2[row.$index].tscore);
+        var pscj = ks(that.tableData2[row.$index].nscore);
+        var bili = ks(that.input4)
+        that.tableData2[row.$index].zscore = parseInt(pscj) * (100 - parseInt(bili)) * 0.01 + parseInt(kscj) * parseInt(bili) * 0.01;
+        console.log("成绩结果：", kscj, pscj)
+        console.log("成绩结果：", that.tableData2[row.$index].zscore)
+
+      },
+      kscj(row) {
+        let that = this;
+        console.log(row);
+
+        function ks(a) {
+          var k1 = ''
+          if (a == '')
+            k1 = '0'
+          else
+            k1 = a
+          if (a == '')
+            k1 = '0'
+          else
+            k1 = a
+          return k1;
+        }
+
+        var kscj = ks(that.tableData2[row.$index].tscore);
+        var pscj = ks(that.tableData2[row.$index].nscore);
+        var bili = ks(that.input4)
+        that.tableData2[row.$index].zscore = parseInt(pscj) * (100 - parseInt(bili)) * 0.01 + parseInt(kscj) * parseInt(bili) * 0.01;
+        console.log("成绩结果：", kscj, pscj)
+        console.log("成绩结果：", that.tableData2[row.$index].zscore)
       }
     },
     mounted() {
@@ -144,7 +227,7 @@
         success: function (data) {
           console.log(data);
           for (var i = 0; i < data.length; i++) {
-            that.options.push({'value':data[i].kh,'label':data[i].km})
+            that.options.push({'value': data[i].kh, 'label': data[i].km})
           }
         }
       })
@@ -153,15 +236,14 @@
     },
     data() {
       return {
-        tableData: [
-
-        ],
+        tableData: [],
         name: '',
         stu_number: '',
         options: [],
         tableData2: [],
-        input: '',
-        value: ''
+        input4: '',
+        value: '',
+        kh: ''
       }
     }
 

@@ -13,5 +13,6 @@ urlpatterns = [
     url('del_course/', views.del_course, name='del_course'),
     url('stu_information/', views.stu_information, name='stu_information'),
     url('find_course_teacher/', views.find_course_teacher, name='find_course_teacher'),
-    url('find_student_course/', views.find_student_course, name='find_student_course')
+    url('find_student_course/', views.find_student_course, name='find_student_course'),
+    url('input_geade/', views.input_geade, name='input_geade')
 ]

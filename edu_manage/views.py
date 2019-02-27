@@ -119,12 +119,28 @@ def find_course_teacher(request):
 
 def find_student_course(request):
     kh = request.GET['kh']
-    student_ids = E.objects.filter(kh=kh, xq='2018-2019春季')
+    gh = request.GET['gh']
+    student_ids = E.objects.filter(kh=kh, xq='2018-2019春季', gh=gh)
     response = []
     for student_id in student_ids:
         print(student_id.xh)
         student_name = S.objects.filter(xh=student_id.xh)
-        response.append({'xh': student_id.xh, 'xm': student_name[0].xm, 'pscj': student_id.pscj, 'kscj': student_id.kscj,
-                         'zpcj': student_id.zpcj})
+        response.append(
+            {'xh': student_id.xh, 'xm': student_name[0].xm, 'pscj': student_id.pscj, 'kscj': student_id.kscj,
+             'zpcj': student_id.zpcj})
 
     return JsonResponse(response, safe=False)
+
+
+def input_geade(request):
+    xh = request.GET['xh']
+    kh = request.GET['kh']
+    gh = request.GET['gh']
+    pscj = request.GET['pscj']
+    kscj = request.GET['kscj']
+    zpcj = request.GET['zpcj']
+    if pscj!='' and kscj!='' and  zpcj!='':
+        E.objects.filter(xh=xh, kh=kh, gh=gh).update(pscj=pscj, kscj=kscj, zpcj=zpcj)
+        return JsonResponse({"res": 'OK'})
+    else:
+        return JsonResponse({"res": 'NO'})
