@@ -138,9 +138,24 @@ def input_geade(request):
     gh = request.GET['gh']
     pscj = request.GET['pscj']
     kscj = request.GET['kscj']
-    zpcj = request.GET['zpcj']
+    zpcj = str(int(float(request.GET['zpcj'])))
     if pscj!='' and kscj!='' and  zpcj!='':
         E.objects.filter(xh=xh, kh=kh, gh=gh).update(pscj=pscj, kscj=kscj, zpcj=zpcj)
         return JsonResponse({"res": 'OK'})
     else:
         return JsonResponse({"res": 'NO'})
+
+
+def find_grade(request):
+    kh = request.GET['kh']
+    gh = request.GET['gh']
+    student_ids = E.objects.filter(kh=kh, xq='2018-2019春季', gh=gh)
+    response = []
+    for student_id in student_ids:
+        print(student_id.xh)
+        zpcj = student_id.zpcj
+        if zpcj == None:
+            zpcj = "-1"
+        response.append({'zpcj': zpcj})
+    return JsonResponse(response, safe=False)
+

@@ -88,23 +88,31 @@
               width="180">
             </el-table-column>
           </el-table>
+          <div id="chart_example">
 
+          </div>
         </el-main>
 
         <el-footer>
           <el-button type="primary" @click="onSubmit">提交成绩</el-button>
         </el-footer>
       </el-container>
+
+
     </el-container>
   </div>
 </template>
 
 <script>
+  import echarts from 'echarts'
+
+
   let that = this
   export default {
     name: "grade_manage",
     methods: {
       onSubmit() {
+        let that = this
         for (var i = 0; i < this.tableData2.length; i++) {
           $.ajax({
             url: "/input_geade/",
@@ -119,12 +127,85 @@
             },
             success: function (data) {
               console.log(data);
-
             }
           })
-
-
         }
+
+        let myChart = echarts.init(document.getElementById('chart_example'));
+        var one = 0, two = 0, three = 0, four = 0, five = 0, six = 0, seven = 0, eight = 0, nine = 0, ten = 0;
+
+        function jisuan(data) {
+          for (var i = 0; i < data.length; i++) {
+            if (data[i].zpcj >= "0" && data[i].zpcj <= "10" && data[i].zpcj != "-1") {
+              one++;
+            } else if (data[i].zpcj >= "11" && data[i].zpcj <= "20") {
+              two++;
+            } else if (data[i].zpcj >= "21" && data[i].zpcj <= "30") {
+              three++;
+            } else if (data[i].zpcj >= "31" && data[i].zpcj <= "40") {
+              four++;
+            } else if (data[i].zpcj >= "41" && data[i].zpcj <= "50") {
+              five++;
+            } else if (data[i].zpcj >= "51" && data[i].zpcj <= "60") {
+              six++;
+            } else if (data[i].zpcj >= "61" && data[i].zpcj <= "70") {
+              seven++;
+            } else if (data[i].zpcj >= "71" && data[i].zpcj <= "80") {
+              eight++;
+            } else if (data[i].zpcj >= "81" && data[i].zpcj <= "90") {
+              nine++;
+            } else if (data[i].zpcj >= "91" && data[i].zpcj <= "100") {
+              ten++;
+            }
+          }
+        }
+
+        $.ajax({
+          url: "/find_grade/",
+          dataType: "json",
+          data: {
+            gh: sessionStorage.getItem('person_id'),
+            kh: that.kh
+          },
+          success: function (data) {
+            console.log("获取成绩：", data);
+            setTimeout(jisuan(data), 3000)
+
+            console.log(one, two, three, four, five, six, seven, eight, nine, ten)
+            let option = {
+              color: ['#f44'],
+              tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                  type: 'shadow'
+                }
+              },
+              xAxis: [
+                {
+                  type: 'category',
+                  data: ['0-10', '11-20', '21-30', '31-40', '41-50', '51-60', '61-70', '71-80', '81-90', '91-100'],
+                  axisTick: {
+                    alignWithLabel: true
+                  }
+                }
+              ],
+              yAxis: [
+                {
+                  type: 'value'
+                }
+              ],
+              series: [
+                {
+                  name: '分数分布',
+                  type: 'bar',
+                  barWidth: '60%',
+                  data: [one, two, three, four, five, six, seven, eight, nine, ten]
+                }
+              ]
+            };
+            myChart.setOption(option);
+          }
+        })
       },
       quit_login() {
         console.log("用户点击退出登录");
@@ -136,7 +217,6 @@
         let that = this;
         console.log(e);
         this.kh = e;
-
         $.ajax({
           url: "/find_student_course/",
           dataType: "json",
@@ -156,6 +236,82 @@
                 'zscore': data[i].zpcj
               })
             }
+            let myChart = echarts.init(document.getElementById('chart_example'));
+            var one = 0, two = 0, three = 0, four = 0, five = 0, six = 0, seven = 0, eight = 0, nine = 0, ten = 0;
+
+            function jisuan(data) {
+              for (var i = 0; i < data.length; i++) {
+                console.log(data[i].zpcj)
+                if (data[i].zpcj >= "0" && data[i].zpcj <= "10" && data[i].zpcj != "-1") {
+                  one++;
+                } else if (data[i].zpcj >= "11" && data[i].zpcj <= "20") {
+                  two++;
+                } else if (data[i].zpcj >= "21" && data[i].zpcj <= "30") {
+                  three++;
+                } else if (data[i].zpcj >= "31" && data[i].zpcj <= "40") {
+                  four++;
+                } else if (data[i].zpcj >= "41" && data[i].zpcj <= "50") {
+                  five++;
+                } else if (data[i].zpcj >= "51" && data[i].zpcj <= "60") {
+                  six++;
+                } else if (data[i].zpcj >= "61" && data[i].zpcj <= "70") {
+                  seven++;
+                } else if (data[i].zpcj >= "71" && data[i].zpcj <= "80") {
+                  eight++;
+                } else if (data[i].zpcj >= "81" && data[i].zpcj <= "90") {
+                  nine++;
+                } else if (data[i].zpcj >= "91" && data[i].zpcj <= "100") {
+                  ten++;
+                }
+              }
+            }
+
+            $.ajax({
+              url: "/find_grade/",
+              dataType: "json",
+              data: {
+                gh: sessionStorage.getItem('person_id'),
+                kh: that.kh
+              },
+              success: function (data) {
+                console.log("获取成绩：", data);
+                setTimeout(jisuan(data), 3000)
+
+                console.log(one, two, three, four, five, six, seven, eight, nine, ten)
+                let option = {
+                  color: ['#f44'],
+                  tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                      type: 'shadow'
+                    }
+                  },
+                  xAxis: [
+                    {
+                      type: 'category',
+                      data: ['0-10', '11-20', '21-30', '31-40', '41-50', '51-60', '61-70', '71-80', '81-90', '91-100'],
+                      axisTick: {
+                        alignWithLabel: true
+                      }
+                    }
+                  ],
+                  yAxis: [
+                    {
+                      type: 'value'
+                    }
+                  ],
+                  series: [
+                    {
+                      name: '分数分布',
+                      type: 'bar',
+                      barWidth: '60%',
+                      data: [one, two, three, four, five, six, seven, eight, nine, ten]
+                    }
+                  ]
+                };
+                myChart.setOption(option);
+              }
+            })
           }
         })
       },
@@ -189,7 +345,6 @@
         that.tableData2[row.$index].zscore = parseInt(pscj) * (100 - parseInt(bili)) * 0.01 + parseInt(kscj) * parseInt(bili) * 0.01;
         console.log("成绩结果：", kscj, pscj)
         console.log("成绩结果：", that.tableData2[row.$index].zscore)
-
       },
       kscj(row) {
         let that = this;
@@ -233,6 +388,86 @@
       })
       this.name = sessionStorage.getItem('person_name');
       this.stu_number = sessionStorage.getItem('person_id');
+      let myChart = echarts.init(document.getElementById('chart_example'));
+      var one = 0, two = 0, three = 0, four = 0, five = 0, six = 0, seven = 0, eight = 0, nine = 0, ten = 0;
+
+      function jisuan(data) {
+        for (var i = 0; i < data.length; i++) {
+          if (data[i].zpcj >= "0" && data[i].zpcj <= "10" && data[i].zpcj != "-1") {
+            one++;
+          } else if (data[i].zpcj >= "11" && data[i].zpcj <= "20") {
+            two++;
+          } else if (data[i].zpcj >= "21" && data[i].zpcj <= "30") {
+            three++;
+          } else if (data[i].zpcj >= "31" && data[i].zpcj <= "40") {
+            four++;
+          } else if (data[i].zpcj >= "41" && data[i].zpcj <= "50") {
+            five++;
+          } else if (data[i].zpcj >= "51" && data[i].zpcj <= "60") {
+            six++;
+          } else if (data[i].zpcj >= "61" && data[i].zpcj <= "70") {
+            seven++;
+          } else if (data[i].zpcj >= "71" && data[i].zpcj <= "80") {
+            eight++;
+          } else if (data[i].zpcj >= "81" && data[i].zpcj <= "90") {
+            nine++;
+          } else if (data[i].zpcj >= "91" && data[i].zpcj <= "100") {
+            ten++;
+          }
+        }
+      }
+
+      $.ajax({
+        url: "/find_grade/",
+        dataType: "json",
+        data: {
+          gh: sessionStorage.getItem('person_id'),
+          kh: that.kh
+        },
+        success: function (data) {
+          console.log("获取成绩：", data);
+          setTimeout(jisuan(data), 3000)
+
+          console.log(one, two, three, four, five, six, seven, eight, nine, ten)
+          let option = {
+            color: ['#f44'],
+            tooltip: {
+              trigger: 'axis',
+              axisPointer: {
+                type: 'shadow'
+              }
+            },
+            xAxis: [
+              {
+                type: 'category',
+                data: ['0-10', '11-20', '21-30', '31-40', '41-50', '51-60', '61-70', '71-80', '81-90', '91-100'],
+                axisTick: {
+                  alignWithLabel: true
+                }
+              }
+            ],
+            yAxis: [
+              {
+                type: 'value'
+              }
+            ],
+            series: [
+              {
+                name: '分数分布',
+                type: 'bar',
+                barWidth: '60%',
+                data: [one, two, three, four, five, six, seven, eight, nine, ten]
+              }
+            ]
+          };
+          myChart.setOption(option);
+        }
+      })
+
+      //建议加上以下这一行代码，不加的效果图如下（当浏览器窗口缩小的时候）。超过了div的界限（红色边框）
+      window.addEventListener('resize', function () {
+        myChart.resize()
+      });
     },
     data() {
       return {
@@ -246,9 +481,7 @@
         kh: ''
       }
     }
-
   }
-
 </script>
 
 <style scoped>
@@ -263,4 +496,10 @@
     font-size: 15px;
   }
 
+  #chart_example {
+    width: 50%;
+    height: 500px;
+    border: 1px solid red;
+    margin: 0 auto;
+  }
 </style>
